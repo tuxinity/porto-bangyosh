@@ -88,7 +88,7 @@ export const PERSONAL_DATA = {
       image:
         "https://ik.imagekit.io/moj1rqgkw/Portofolio/luncswap.jpg?updatedAt=1737015668430",
       tags: ["NextJS", "ChakraUI", "TypeScript", "EtherJS", "ThirdWeb"],
-      link: "https://globalnetwork.finance/",
+      link: "#",
       source: "#",
     },
     {
