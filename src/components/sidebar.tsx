@@ -70,7 +70,7 @@ export const Sidebar = ({
         <div className="mt-auto pt-4 border-t">
           <div className="flex gap-4 justify-center mb-4">
             <a
-              href="#"
+              href="https://github.com/Y0SH4"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-xl hover:bg-accent/50 transition-all hover:scale-110"
@@ -85,7 +85,7 @@ export const Sidebar = ({
               </svg>
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/yosaagung/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-xl hover:bg-accent/50 transition-all hover:scale-110"
