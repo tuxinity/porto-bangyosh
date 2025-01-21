@@ -24,22 +24,18 @@ export const ProjectSection = ({ projects }: ProjectSectionProps) => {
         </span>
         Projects
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {projects.map((project, index) => (
           <Link key={index} to={`/projects/${project.id}`}>
-            <Card
-              className="group h-full flex flex-col overflow-hidden border-transparent hover:border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/5 transition-all duration-300 bg-gray-50 dark:bg-[#1c1c1c]"
-            >
+            <Card className="group transform hover:scale-[1.02] transition-all duration-300 h-full flex flex-col overflow-hidden border-transparent hover:border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/5 bg-gray-50 dark:bg-[#1c1c1c]">
               <div className="flex flex-col gap-4 p-5 h-full">
-                <div className="relative w-full aspect-video max-w-[500px] mx-auto">
+                <div className="relative w-full aspect-video max-w-[500px] mx-auto overflow-hidden rounded-xl">
                   <img
                     src={project.image}
                     alt={project.name}
-                    className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover transition-transform duration-300"
                   />
                 </div>
-
                 <div className="flex-1 flex flex-col justify-between gap-4">
                   <div>
                     <h3 className="text-lg font-medium">{project.name}</h3>
@@ -47,7 +43,6 @@ export const ProjectSection = ({ projects }: ProjectSectionProps) => {
                       {project.description}
                     </p>
                   </div>
-
                   <div className="flex flex-col gap-4">
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag, i) => (
@@ -70,3 +65,5 @@ export const ProjectSection = ({ projects }: ProjectSectionProps) => {
     </section>
   );
 };
+
+export default ProjectSection;

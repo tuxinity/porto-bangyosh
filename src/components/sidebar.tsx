@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
+import { useNavigate, useLocation } from "react-router-dom";
+import { NAVITEM } from "@/constant/navigation";
 import { ModeToggle } from "@/components/mode-toggle";
 
 interface SidebarProps {
@@ -12,23 +14,39 @@ export const Sidebar = ({
   setIsMobileMenuOpen,
 }: SidebarProps) => {
   const [activeSection, setActiveSection] = useState("about");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setActiveSection(id);
-      setIsMobileMenuOpen(false);
     }
   };
+  const handleNavigation = async (item: (typeof NAVITEM)[0]) => {
+    if (item.link) {
+      navigate(item.link);
+      setActiveSection(item.id);
+    } else {
+      if (location.pathname !== "/") {
+        await navigate("/");
+        setTimeout(() => {
+          scrollToSection(item.id);
+        }, 100);
+      } else {
+        scrollToSection(item.id);
+      }
+    }
+    setIsMobileMenuOpen(false);
+  };
 
-  // Navigation items data
-  const navItems = [
-    { id: "about", icon: "👨‍💻", label: "About Me" },
-    { id: "education", icon: "🎓", label: "Education" },
-    { id: "experience", icon: "💼", label: "Experience" },
-    { id: "projects", icon: "🚀", label: "Projects" },
-  ];
+  useEffect(() => {
+    const currentItem = NAVITEM.find((item) => item.link === location.pathname);
+    if (currentItem) {
+      setActiveSection(currentItem.id);
+    }
+  }, [location.pathname]);
 
   return (
     <aside
@@ -51,7 +69,7 @@ export const Sidebar = ({
         </div>
 
         <nav className="space-y-2 flex-1">
-          {navItems.map((item) => (
+          {NAVITEM.map((item) => (
             <Button
               key={item.id}
               variant="ghost"
@@ -60,7 +78,7 @@ export const Sidebar = ({
                   ? "bg-accent/60 font-medium shadow-md"
                   : ""
               }`}
-              onClick={() => scrollToSection(item.id)}
+              onClick={() => handleNavigation(item)}
             >
               <span className="mr-3">{item.icon}</span> {item.label}
             </Button>
